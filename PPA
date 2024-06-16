@@ -1,0 +1,103 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Función para generar un número aleatorio dentro de un rango
+int generarNumero(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
+
+// Función para presentar una pregunta de suma
+void preguntaSuma(int &puntos) {
+    int a = generarNumero(1, 10);
+    int b = generarNumero(1, 10);
+    int respuesta;
+    cout << "¿Cuánto es " << a << " + " << b << "? ";
+    cin >> respuesta;
+    if (respuesta == a + b) {
+        cout << "¡Correcto!" << endl;
+        puntos++;
+    } else {
+        cout << "Incorrecto. La respuesta correcta es " << a + b << "." << endl;
+    }
+}
+
+// Función para presentar una pregunta de resta
+void preguntaResta(int &puntos) {
+    int a = generarNumero(1, 10);
+    int b = generarNumero(1, a); // para asegurar que no haya números negativos
+    int respuesta;
+    cout << "¿Cuánto es " << a << " - " << b << "? ";
+    cin >> respuesta;
+    if (respuesta == a - b) {
+        cout << "¡Correcto!" << endl;
+        puntos++;
+    } else {
+        cout << "Incorrecto. La respuesta correcta es " << a - b << "." << endl;
+    }
+}
+
+// Función para presentar una pregunta de multiplicación
+void preguntaMultiplicacion(int &puntos) {
+    int a = generarNumero(1, 10);
+    int b = generarNumero(1, 10);
+    int respuesta;
+    cout << "¿Cuánto es " << a << " * " << b << "? ";
+    cin >> respuesta;
+    if (respuesta == a * b) {
+        cout << "¡Correcto!" << endl;
+        puntos++;
+    } else {
+        cout << "Incorrecto. La respuesta correcta es " << a * b << "." << endl;
+    }
+}
+
+// Función para presentar una pregunta de división
+void preguntaDivision(int &puntos) {
+    int a = generarNumero(1, 10);
+    int b = generarNumero(1, 10);
+    int respuesta;
+    cout << "¿Cuánto es " << a * b << " / " << b << "? ";
+    cin >> respuesta;
+    if (respuesta == a) {
+        cout << "¡Correcto!" << endl;
+        puntos++;
+    } else {
+        cout << "Incorrecto. La respuesta correcta es " << a << "." << endl;
+    }
+}
+
+// Función principal del juego
+void jugar() {
+    srand(time(0));
+    int puntos = 0;
+    const int totalPreguntas = 5;
+
+    for (int i = 0; i < totalPreguntas; i++) {
+        int tipoPregunta = generarNumero(1, 4);
+        switch (tipoPregunta) {
+            case 1:
+                preguntaSuma(puntos);
+                break;
+            case 2:
+                preguntaResta(puntos);
+                break;
+            case 3:
+                preguntaMultiplicacion(puntos);
+                break;
+            case 4:
+                preguntaDivision(puntos);
+                break;
+        }
+    }
+
+    cout << "Juego terminado. Tu puntuación es: " << puntos << " de " << totalPreguntas << "." << endl;
+}
+
+int main() {
+    cout << "¡Bienvenido al juego matemático!" << endl;
+    jugar();
+    return 0;
+}
